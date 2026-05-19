@@ -1,4 +1,4 @@
-<app-header (search)="onSearch($event)"></app-header>
+<app-header (search)="onSearch($event)" (openCart)="openCart()"></app-header>
 
 <app-banner></app-banner>
 
@@ -17,4 +17,10 @@
   *ngIf="selectedProduct" 
   [product]="selectedProduct" 
   (close)="closeProductDetail()"
-></app-product-detail-modal>
+></app-product-detail-modal>
+
+<!-- Modal/Sidebar do Carrinho com QR Code -->
+<app-cart-modal
+  *ngIf="showCart"
+  (close)="closeCart()"
+></app-cart-modal>

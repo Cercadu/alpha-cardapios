@@ -19,7 +19,7 @@
     background: #ffffff;
     border-top-left-radius: 28px;
     border-top-right-radius: 28px;
-    overflow-y: auto;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -79,7 +79,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding-bottom: 120px;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .title-section {
@@ -245,10 +246,6 @@ h3 {
 }
 
 .modal-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     background: #ffffff;
     border-top: 1px solid rgba(0, 0, 0, 0.06);
     padding: 16px 24px;
@@ -257,6 +254,7 @@ h3 {
     align-items: center;
     box-sizing: border-box;
     z-index: 10;
+    flex-shrink: 0;
 }
 
 .quantity-selector {

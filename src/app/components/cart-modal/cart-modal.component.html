@@ -1,0 +1,94 @@
+<div class="modal-backdrop" (click)="closeCart()">
+  <!-- Tela Principal do Carrinho -->
+  <div class="modal-sheet" *ngIf="!showQrCode" (click)="$event.stopPropagation()">
+    <div class="modal-title-bar">
+      <div class="title-left">
+        <h2>Seu Carrinho</h2>
+        <span class="table-tag">Mesa 12</span>
+      </div>
+      <button class="close-header-btn" (click)="closeCart()" aria-label="Fechar">✕</button>
+    </div>
+
+    <!-- Corpo do Carrinho -->
+    <div class="modal-body">
+      <!-- Estado Vazio -->
+      <div class="empty-state" *ngIf="cartService.cartItems().length === 0">
+        <span class="empty-icon">🛒</span>
+        <h3>Seu carrinho está vazio</h3>
+        <p>Explore nosso cardápio e adicione pratos deliciosos para iniciar seu pedido.</p>
+        <button class="explore-btn" (click)="closeCart()">Escolher Pratos</button>
+      </div>
+
+      <!-- Lista de Itens -->
+      <div class="items-list" *ngIf="cartService.cartItems().length > 0">
+        <div class="cart-item" *ngFor="let item of cartService.cartItems()">
+          <img [src]="item.product.image" [alt]="item.product.name" class="item-img" />
+          
+          <div class="item-details">
+            <div class="item-header">
+              <h4 class="item-name">{{ item.product.name }}</h4>
+              <button class="delete-btn" (click)="removeItem(item)" aria-label="Remover">🗑️</button>
+            </div>
+            
+            <p class="item-option" *ngIf="item.selectedOption">
+              Opção: <span>{{ item.selectedOption.label }}</span>
+            </p>
+
+            <div class="item-footer">
+              <div class="quantity-selector">
+                <button class="qty-btn" (click)="decrementQuantity(item)" [disabled]="item.quantity <= 1">-</button>
+                <span class="qty-number">{{ item.quantity }}</span>
+                <button class="qty-btn" (click)="incrementQuantity(item)">+</button>
+              </div>
+              <span class="item-price">
+                R$ {{ (item.singlePrice * item.quantity).toFixed(2).replace('.', ',') }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rodapé Fixo com Valores -->
+    <div class="modal-footer" *ngIf="cartService.cartItems().length > 0">
+      <div class="summary-row">
+        <span class="summary-label">Total do Pedido</span>
+        <span class="summary-value">R$ {{ cartService.totalPrice().toFixed(2).replace('.', ',') }}</span>
+      </div>
+      
+      <button class="action-btn" (click)="generateOrderQr()">
+        <span>Fazer Pedido (Gerar QR Code)</span>
+        <span class="action-icon">⚡</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Tela de QR Code para o Garçom -->
+  <div class="qr-overlay-card" *ngIf="showQrCode" (click)="$event.stopPropagation()">
+    <div class="qr-header">
+      <span class="fire-icon">🔥</span>
+      <h3>Apresente ao Garçom</h3>
+      <p class="qr-subtitle">O garçom escaneará o código para registrar seu pedido</p>
+    </div>
+
+    <div class="qr-code-box">
+      <!-- Imagem do QR Code Dinâmico Colorido gerada sob demanda -->
+      <img [src]="qrCodeUrl" alt="QR Code do Pedido" class="qr-code-img" />
+      <div class="table-badge-large">MESA 12</div>
+    </div>
+
+    <div class="order-summary-box">
+      <div class="box-title">Resumo do Pedido</div>
+      <pre class="summary-pre">{{ orderSummaryText }}</pre>
+    </div>
+
+    <div class="qr-actions">
+      <button class="finish-btn" (click)="finishOrder()">
+        Entendido / Finalizar
+      </button>
+      <button class="back-to-cart-btn" (click)="showQrCode = false">
+        Voltar ao Carrinho
+      </button>
+    </div>
+  </div>
+</div>

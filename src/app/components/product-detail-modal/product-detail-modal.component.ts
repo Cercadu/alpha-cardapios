@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../data/menu-data';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-detail-modal',
@@ -11,6 +12,8 @@ import { Product } from '../../data/menu-data';
 export class ProductDetailModalComponent implements OnInit {
   @Input() product!: Product;
   @Output() close = new EventEmitter<void>();
+
+  private cartService = inject(CartService);
 
   quantity: number = 1;
   selectedPriceIndex: number = 0;
@@ -47,14 +50,21 @@ export class ProductDetailModalComponent implements OnInit {
   }
 
   addToCart(): void {
-    const selectedOptionText = this.product.prices && this.product.prices.length > 0
-      ? ` (${this.product.prices[this.selectedPriceIndex].label})`
+    const selectedOption = this.product.prices && this.product.prices.length > 0
+      ? this.product.prices[this.selectedPriceIndex]
+      : undefined;
+
+    // Adiciona o produto ao carrinho de verdade
+    this.cartService.addToCart(this.product, this.quantity, selectedOption);
+
+    const selectedOptionText = selectedOption
+      ? ` (${selectedOption.label})`
       : '';
     
     this.toastMessage = `${this.quantity}x ${this.product.name}${selectedOptionText} adicionado ao pedido!`;
     this.showToast = true;
 
-    // Wait for toast animation, then close the modal
+    // Aguarda a animação do toast e fecha o modal
     setTimeout(() => {
       this.showToast = false;
       this.close.emit();
