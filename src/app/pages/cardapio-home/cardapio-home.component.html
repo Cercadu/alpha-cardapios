@@ -5,5 +5,16 @@
 <app-category-list (categoryChange)="onCategoryChange($event)"></app-category-list>
 
 <div class="products">
-    <app-product-card *ngFor="let prod of filteredProducts" [product]="prod"></app-product-card>
+    <app-product-card 
+      *ngFor="let prod of filteredProducts" 
+      [product]="prod"
+      (clickCard)="openProductDetail($event)"
+    ></app-product-card>
 </div>
+
+<!-- Modal Expandido de Detalhes do Produto (iFood Style) -->
+<app-product-detail-modal 
+  *ngIf="selectedProduct" 
+  [product]="selectedProduct" 
+  (close)="closeProductDetail()"
+></app-product-detail-modal>

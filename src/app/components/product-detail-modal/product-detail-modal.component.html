@@ -1,0 +1,83 @@
+<div class="modal-backdrop" (click)="close.emit()">
+  <div class="modal-sheet" (click)="$event.stopPropagation()">
+    
+    <!-- Imagem de Capa e Botão Fechar -->
+    <div class="modal-header">
+      <img [src]="product.image" [alt]="product.name" class="modal-cover-img" />
+      <button class="close-btn" (click)="close.emit()" aria-label="Fechar">✕</button>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="modal-body">
+      
+      <!-- Nome e Categoria -->
+      <div class="title-section">
+        <h2>{{ product.name }}</h2>
+        <span class="category-badge">{{ product.category }}</span>
+      </div>
+
+      <!-- Avaliações (Rating & Reviews) -->
+      <div class="rating-container" *ngIf="product.rating">
+        <span class="stars">★ {{ product.rating | number:'1.1-1' }}</span>
+        <span class="reviews">({{ product.reviewsCount }} avaliações)</span>
+      </div>
+
+      <!-- Descrição Completa -->
+      <p class="description" *ngIf="product.description">{{ product.description }}</p>
+
+      <!-- Acompanhamentos/Itens Inclusos -->
+      <div class="inclusions-section" *ngIf="product.inclusions && product.inclusions.length > 0">
+        <h3>Acompanhamentos Inclusos</h3>
+        <ul class="inclusions-list">
+          <li *ngFor="let inc of product.inclusions">
+            <span class="check-icon">✓</span>
+            <span class="inc-text">{{ inc }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Opções de Preço (Se houver múltiplas) -->
+      <div class="options-section" *ngIf="product.prices && product.prices.length > 0">
+        <h3>Escolha uma Opção</h3>
+        <div class="options-list">
+          <div 
+            class="option-item" 
+            *ngFor="let option of product.prices; let i = index"
+            [class.active]="selectedPriceIndex === i"
+            (click)="selectPrice(i)"
+          >
+            <div class="option-left">
+              <span class="radio-circle"></span>
+              <span class="option-label">{{ option.label }}</span>
+            </div>
+            <span class="option-price">R$ {{ option.value | number:'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Rodapé Fixo com Contador e CTA -->
+    <div class="modal-footer">
+      <div class="quantity-selector">
+        <button class="qty-btn" (click)="decrement()" [disabled]="quantity <= 1">−</button>
+        <span class="qty-number">{{ quantity }}</span>
+        <button class="qty-btn" (click)="increment()">+</button>
+      </div>
+
+      <button class="add-btn" (click)="addToCart()">
+        <span>Adicionar</span>
+        <span class="total-price">R$ {{ (currentPrice * quantity) | number:'1.2-2' }}</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Toast de Sucesso Interno -->
+  <div class="modal-toast" [class.show]="showToast">
+    <div class="toast-body">
+      <span class="toast-icon">✨</span>
+      <span class="toast-text">{{ toastMessage }}</span>
+    </div>
+  </div>
+</div>

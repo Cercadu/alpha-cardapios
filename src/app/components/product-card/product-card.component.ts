@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../data/menu-data';
 
@@ -10,5 +10,6 @@ import { Product } from '../../data/menu-data';
 })
 export class ProductCardComponent {
   @Input() product!: Product;
+  @Output() clickCard = new EventEmitter<Product>();
 }
 

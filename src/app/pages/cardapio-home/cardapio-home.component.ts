@@ -5,6 +5,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { BannerComponent } from '../../components/banner/banner.component';
 import { CategoryListComponent } from '../../components/category-list/category-list.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
+import { ProductDetailModalComponent } from '../../components/product-detail-modal/product-detail-modal.component';
 import { Product, MENU_PRODUCTS, MENU_CATEGORIES } from '../../data/menu-data';
 
 @Component({
@@ -16,6 +17,7 @@ import { Product, MENU_PRODUCTS, MENU_CATEGORIES } from '../../data/menu-data';
     BannerComponent,
     CategoryListComponent,
     ProductCardComponent,
+    ProductDetailModalComponent,
   ],
   templateUrl: './cardapio-home.component.html',
   styleUrl: './cardapio-home.component.css',
@@ -25,6 +27,8 @@ export class CardapioHomeComponent implements OnInit {
   filteredProducts: Product[] = [];
   selectedCategory: string = MENU_CATEGORIES[0];
   searchQuery: string = '';
+  selectedProduct: Product | null = null;
+
 
   ngOnInit(): void {
     this.filterProducts();
@@ -50,6 +54,14 @@ export class CardapioHomeComponent implements OnInit {
       
       return matchesCategory && matchesSearch;
     });
+  }
+
+  openProductDetail(product: Product): void {
+    this.selectedProduct = product;
+  }
+
+  closeProductDetail(): void {
+    this.selectedProduct = null;
   }
 }
 
