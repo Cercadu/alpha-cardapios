@@ -1,0 +1,24 @@
+<div class="product-card">
+    <div class="product-details">
+        <h3>{{ product.name }}</h3>
+
+        <p *ngIf="product.description">{{ product.description }}</p>
+
+        <!-- Se tiver múltiplos preços (ex: Simples/Completo ou quantidade de Pessoas) -->
+        <div class="price-options" *ngIf="product.prices && product.prices.length > 0">
+            <div class="price-row" *ngFor="let option of product.prices">
+                <span class="price-label">{{ option.label }}</span>
+                <span class="price-value">R$ {{ option.value | number:'1.2-2' }}</span>
+            </div>
+        </div>
+
+        <!-- Se tiver preço único -->
+        <div class="single-price" *ngIf="!product.prices || product.prices.length === 0">
+            <span class="price-value">R$ {{ product.price | number:'1.2-2' }}</span>
+        </div>
+    </div>
+
+    <div class="product-image-container">
+        <img [src]="product.image" [alt]="product.name" />
+    </div>
+</div>

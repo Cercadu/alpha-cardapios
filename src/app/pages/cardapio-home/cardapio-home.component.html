@@ -1,0 +1,9 @@
+<app-header (search)="onSearch($event)"></app-header>
+
+<app-banner></app-banner>
+
+<app-category-list (categoryChange)="onCategoryChange($event)"></app-category-list>
+
+<div class="products">
+    <app-product-card *ngFor="let prod of filteredProducts" [product]="prod"></app-product-card>
+</div>

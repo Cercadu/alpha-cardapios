@@ -1,0 +1,37 @@
+<div class="banner-container">
+  <div class="banner-background"></div>
+  <div class="banner-overlay"></div>
+  
+  <div class="banner-content">
+    <div class="promo-badge">
+      <span class="badge-icon">🔥</span>
+      <span class="badge-text">Destaque do Dia: Burger Artesanal com 15% OFF</span>
+    </div>
+    
+    <h1>Sabor Incomparável em Cada Detalhe</h1>
+    
+    <p>Experimente nossos blends exclusivos, ingredientes selecionados e molhos especiais. Peça direto da mesa e acompanhe tudo pelo celular de forma rápida e prática.</p>
+    
+    <div class="banner-actions">
+      <button class="btn btn-primary" (click)="scrollToMenu()">
+        Fazer Pedido
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor">
+          <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T760-160H240Z"/>
+        </svg>
+      </button>
+      <button class="btn btn-secondary" (click)="callWaiter()">
+        <span class="btn-icon">🔔</span>
+        Chamar Garçom
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Premium Toast Notification -->
+<div class="toast-notification" [class.show]="showNotification">
+  <div class="toast-icon">🔔</div>
+  <div class="toast-body">
+    <h4>Garçom Chamado!</h4>
+    <p>Um atendente foi notificado e já está a caminho da sua mesa.</p>
+  </div>
+</div>

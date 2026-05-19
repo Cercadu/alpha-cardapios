@@ -1,0 +1,217 @@
+.banner-container {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    height: 70dvh;
+    max-height: 650px;
+    background-color: #0b0b0b;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.banner-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/banner_burger.png');
+    background-size: cover;
+    background-position: center right;
+    z-index: 1;
+    transform: scale(1.05);
+    animation: zoomEffect 15s ease-out infinite alternate;
+}
+
+@keyframes zoomEffect {
+    0% { transform: scale(1.02) translate(0, 0); }
+    100% { transform: scale(1.08) translate(-10px, 0); }
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #0b0b0be0 0%, #0b0b0b50 50%, #0b0b0b00 100%);
+    backdrop-filter: blur(1px);
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .banner-overlay {
+        background: linear-gradient(180deg, rgba(11, 11, 11, 0.7) 0%, rgba(11, 11, 11, 0.85) 100%);
+        backdrop-filter: blur(2px);
+    }
+    
+    .banner-container {
+        padding: 24px;
+        height: auto;
+        min-height: 480px;
+    }
+}
+
+.banner-content {
+    position: relative;
+    max-width: 600px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.promo-badge {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 65, 248, 0.15);
+    border: 1px solid rgba(255, 65, 248, 0.3);
+    padding: 8px 16px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+}
+
+.badge-icon {
+    font-size: 1.1rem;
+}
+
+.badge-text {
+    color: #ff41f8;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: white;
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -1.5px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+p {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    color: #cccccc;
+    margin: 0;
+    line-height: 1.6;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.banner-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff41f8 0%, #7702ff 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(255, 65, 248, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(255, 65, 248, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+}
+
+/* Custom Premium Toast Notification */
+.toast-notification {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: rgba(18, 18, 18, 0.85);
+    border: 1px solid rgba(255, 65, 248, 0.3);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    padding: 16px 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 380px;
+    z-index: 9999;
+    transform: translateY(100px) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast-notification.show {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.toast-icon {
+    font-size: 2rem;
+    animation: ring 1s ease infinite alternate;
+}
+
+@keyframes ring {
+    0% { transform: rotate(-10deg); }
+    100% { transform: rotate(10deg); }
+}
+
+.toast-body h4 {
+    margin: 0 0 4px 0;
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.toast-body p {
+    margin: 0;
+    color: #a0a0a0;
+    font-size: 0.85rem;
+    line-height: 1.3;
+}
+
