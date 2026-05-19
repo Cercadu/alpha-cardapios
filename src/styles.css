@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global light theme definitions */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7; /* Fundo cinza suave tipo iFood */
+  color: #1a1a1a; /* Texto escuro de alto contraste */
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

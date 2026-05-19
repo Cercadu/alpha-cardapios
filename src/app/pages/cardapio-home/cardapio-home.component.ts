@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header.component';
 import { BannerComponent } from '../../components/banner/banner.component';
 import { CategoryListComponent } from '../../components/category-list/category-list.component';
@@ -12,7 +11,6 @@ import { Product, MENU_PRODUCTS, MENU_CATEGORIES } from '../../data/menu-data';
   selector: 'app-cardapio-home',
   imports: [
     CommonModule,
-    RouterOutlet,
     HeaderComponent,
     BannerComponent,
     CategoryListComponent,

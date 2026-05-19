@@ -81,8 +81,8 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255, 65, 248, 0.15);
-    border: 1px solid rgba(255, 65, 248, 0.3);
+    background: rgba(217, 56, 41, 0.15);
+    border: 1px solid rgba(217, 56, 41, 0.3);
     padding: 8px 16px;
     border-radius: 50px;
     backdrop-filter: blur(10px);
@@ -93,7 +93,7 @@
 }
 
 .badge-text {
-    color: #ff41f8;
+    color: #d93829;
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -140,14 +140,14 @@ p {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #ff41f8 0%, #7702ff 100%);
+    background: #d93829;
     color: white;
-    box-shadow: 0 4px 20px rgba(255, 65, 248, 0.3);
+    box-shadow: 0 4px 20px rgba(217, 56, 41, 0.3);
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(255, 65, 248, 0.5);
+    box-shadow: 0 8px 30px rgba(217, 56, 41, 0.5);
 }
 
 .btn-secondary {
@@ -168,10 +168,10 @@ p {
     position: fixed;
     bottom: 24px;
     right: 24px;
-    background: rgba(18, 18, 18, 0.85);
-    border: 1px solid rgba(255, 65, 248, 0.3);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(0, 0, 0, 0.06);
     backdrop-filter: blur(20px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     padding: 16px 20px;
     border-radius: 16px;
     display: flex;
@@ -203,14 +203,14 @@ p {
 
 .toast-body h4 {
     margin: 0 0 4px 0;
-    color: white;
+    color: #1a1a1a;
     font-size: 1.05rem;
     font-weight: 700;
 }
 
 .toast-body p {
     margin: 0;
-    color: #a0a0a0;
+    color: #666666;
     font-size: 0.85rem;
     line-height: 1.3;
 }

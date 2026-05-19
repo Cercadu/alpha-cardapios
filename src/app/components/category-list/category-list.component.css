@@ -1,45 +1,56 @@
 .categories {
-    padding: 24px;
-    max-width: 1200px;
+    padding: 24px 16px;
+    max-width: 768px; /* Mantém alinhado perfeitamente com a lista */
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 h2 {
-    color: white;
-    font-size: 1.5rem;
-    margin-bottom: 16px;
-    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 1.35rem;
+    margin: 0 0 16px 0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .category-buttons {
     display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    /* Custom scrollbar para navegadores móveis */
+    scrollbar-width: none; /* Firefox */
+}
+
+.category-buttons::-webkit-scrollbar {
+    display: none; /* Safari e Chrome */
 }
 
 .category-btn {
-    background: rgba(255, 255, 255, 0.05);
-    color: #a0a0a0;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #ffffff;
+    color: #555555;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     padding: 10px 20px;
     border-radius: 30px;
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
 
 .category-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border-color: rgba(255, 65, 248, 0.4);
-    transform: translateY(-2px);
+    background: #fafafa;
+    color: #1a1a1a;
+    border-color: rgba(217, 56, 41, 0.3);
+    transform: translateY(-1px);
 }
 
 .category-btn.active {
-    background: linear-gradient(135deg, #ff41f8 0%, #7702ff 100%);
+    background: #d93829;
     color: white;
-    border: none;
-    box-shadow: 0 4px 15px rgba(255, 65, 248, 0.3);
+    border-color: #d93829;
+    box-shadow: 0 4px 12px rgba(217, 56, 41, 0.2);
 }
-
