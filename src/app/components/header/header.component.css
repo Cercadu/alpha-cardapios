@@ -36,6 +36,13 @@
     animation: flamePulse 1.5s infinite alternate;
 }
 
+.logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    animation: none;
+}
+
 .brand-details {
     display: flex;
     flex-direction: column;
@@ -118,7 +125,7 @@ h1 {
     position: absolute;
     top: -4px;
     right: -4px;
-    background: #d93829; /* Vermelho vibrante tipo iFood */
+    background: var(--primary-color); /* Dinâmico */
     color: white;
     font-size: 0.68rem;
     font-weight: 800;
@@ -130,7 +137,30 @@ h1 {
     justify-content: center;
     padding: 0 4px;
     box-sizing: border-box;
-    box-shadow: 0 2px 5px rgba(217, 56, 41, 0.25);
+    box-shadow: 0 2px 5px rgba(var(--primary-color-rgb), 0.25);
+}
+
+.admin-btn {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    color: #1a1a1a;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.admin-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+    transform: scale(1.05);
+}
+
+.admin-icon {
+    font-size: 1.1rem;
 }
 
 .search-container {
@@ -165,7 +195,7 @@ input::placeholder {
 }
 
 input:focus {
-    border-color: rgba(217, 56, 41, 0.3);
+    border-color: var(--primary-color-border);
     background: #ffffff;
 }
 
@@ -187,13 +217,14 @@ input:focus {
 @keyframes flamePulse {
     0% {
         transform: scale(1);
-        filter: drop-shadow(0 0 2px rgba(217, 56, 41, 0.3));
+        filter: drop-shadow(0 0 2px var(--primary-color-light));
     }
     100% {
         transform: scale(1.1);
-        filter: drop-shadow(0 0 6px rgba(217, 56, 41, 0.7));
+        filter: drop-shadow(0 0 6px var(--primary-color-border));
     }
 }
+
 
 @media (max-width: 480px) {
     .header-content {

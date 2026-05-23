@@ -44,13 +44,14 @@ h2 {
 .category-btn:hover {
     background: #fafafa;
     color: #1a1a1a;
-    border-color: rgba(217, 56, 41, 0.3);
+    border-color: var(--primary-color-border);
     transform: translateY(-1px);
 }
 
 .category-btn.active {
-    background: #d93829;
+    background: var(--primary-color);
     color: white;
-    border-color: #d93829;
-    box-shadow: 0 4px 12px rgba(217, 56, 41, 0.2);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.2);
 }
+

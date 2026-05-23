@@ -1,4 +1,4 @@
-<app-header (search)="onSearch($event)" (openCart)="openCart()"></app-header>
+<app-header (search)="onSearch($event)" (openCart)="openCart()" (openAdmin)="openAdmin()"></app-header>
 
 <app-banner></app-banner>
 
@@ -23,4 +23,11 @@
 <app-cart-modal
   *ngIf="showCart"
   (close)="closeCart()"
-></app-cart-modal>
+></app-cart-modal>
+
+<!-- Modal Administrativo de Configurações e Gerador de QR Code -->
+<app-admin-modal
+  *ngIf="showAdmin"
+  (close)="closeAdmin()"
+></app-admin-modal>
+

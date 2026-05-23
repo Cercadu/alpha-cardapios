@@ -4,7 +4,7 @@
     <div class="modal-title-bar">
       <div class="title-left">
         <h2>Seu Carrinho</h2>
-        <span class="table-tag">Mesa 12</span>
+        <span class="table-tag">Mesa {{ companyService.tableNumber() }}</span>
       </div>
       <button class="close-header-btn" (click)="closeCart()" aria-label="Fechar">✕</button>
     </div>
@@ -74,7 +74,7 @@
     <div class="qr-code-box">
       <!-- Imagem do QR Code Dinâmico Colorido gerada sob demanda -->
       <img [src]="qrCodeUrl" alt="QR Code do Pedido" class="qr-code-img" />
-      <div class="table-badge-large">MESA 12</div>
+      <div class="table-badge-large">MESA {{ companyService.tableNumber() }}</div>
     </div>
 
     <div class="order-summary-box">

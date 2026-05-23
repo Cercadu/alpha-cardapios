@@ -1,0 +1,112 @@
+<div class="modal-backdrop" (click)="close.emit()">
+  <div class="modal-sheet" (click)="$event.stopPropagation()">
+    
+    <!-- Barra de Título -->
+    <div class="modal-title-bar">
+      <div class="title-left">
+        <span class="settings-logo">⚙️</span>
+        <h2>Painel de Controle</h2>
+      </div>
+      <button class="close-header-btn" (click)="close.emit()" aria-label="Fechar">✕</button>
+    </div>
+
+    <!-- Corpo do Config -->
+    <div class="modal-body">
+      
+      <!-- Seção 1: Configuração Global (Empresa Padrão) -->
+      <div class="config-section">
+        <h3>Empresa Padrão (Sem Parâmetro)</h3>
+        <p class="section-desc">Esta empresa será carregada quando o cliente acessar o link direto sem especificar ?empresa= no QR code.</p>
+        
+        <div class="default-company-selector">
+          <button 
+            *ngFor="let company of companies()"
+            class="company-toggle-btn"
+            [class.active]="defaultCompanyId() === company.id"
+            (click)="changeDefaultCompany(company.id)"
+          >
+            @if (isLogoImage(company.logo)) {
+              <img class="company-logo company-logo-img" [src]="company.logo" [alt]="company.name" />
+            } @else {
+              <span class="company-logo">{{ company.logo }}</span>
+            }
+            <span class="company-name">{{ company.name }}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Seção 2: Gerador de QR Code de Mesa -->
+      <div class="config-section">
+        <h3>Gerador de QR Code de Mesa</h3>
+        <p class="section-desc">Gere QR codes específicos para colocar nas mesas dos estabelecimentos ou divulgar em panfletos do evento.</p>
+        
+        <!-- Formulário do Gerador -->
+        <div class="generator-form">
+          <div class="form-group">
+            <label for="company-select">Selecione o Estabelecimento</label>
+            <select id="company-select" class="form-control" [ngModel]="selectedCompanyId()" (ngModelChange)="selectedCompanyId.set($event)">
+              <option *ngFor="let company of companies()" [value]="company.id">
+                {{ isLogoImage(company.logo) ? '' : company.logo + ' ' }}{{ company.name }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="table-input">Número da Mesa</label>
+            <input 
+              id="table-input"
+              type="text" 
+              class="form-control" 
+              placeholder="Ex: 5, 12, Balcao"
+              [ngModel]="tableNum()"
+              (ngModelChange)="tableNum.set($event)"
+            />
+          </div>
+        </div>
+
+        <!-- Painel de Preview em Tempo Real -->
+        <div class="qr-preview-box">
+          <div class="qr-preview-header" [style.color]="selectedCompanyConfig().primaryColor">
+            <span>MESA {{ tableNum() || '...' }}</span>
+          </div>
+
+          <div class="qr-code-wrapper">
+            <img *ngIf="qrCodeUrl()" [src]="qrCodeUrl()" alt="QR Code Gerado" class="preview-qr-img" />
+          </div>
+
+          <div class="generated-url-preview">
+            <span class="url-label">Link de Destino:</span>
+            <code class="url-code">{{ generatedLink() }}</code>
+          </div>
+        </div>
+
+        <!-- Ações do Gerador -->
+        <div class="generator-actions">
+          <button class="action-btn copy-btn" (click)="copyLink()">
+            <span>Copiar Link</span>
+            <span class="btn-sub">{{ showCopySuccess ? 'Copiado! ✓' : 'Copiar URL' }}</span>
+          </button>
+
+          <button class="action-btn test-btn" (click)="testLink()">
+            <span>Testar Link</span>
+            <span class="btn-sub">Carregar no App</span>
+          </button>
+
+          <button class="action-btn print-btn" [style.background]="selectedCompanyConfig().primaryColor" (click)="printQr()">
+            <span>Imprimir QR Code</span>
+            <span class="btn-sub">Download / Print</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Rodapé -->
+    <div class="modal-footer">
+      <button class="finish-btn" (click)="close.emit()">
+        Concluir Configurações
+      </button>
+    </div>
+    
+  </div>
+</div>

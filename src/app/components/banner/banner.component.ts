@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CompanyService } from '../../services/company.service';
+import { isLogoImage } from '../../data/company-data';
 
 @Component({
   selector: 'app-banner',
@@ -8,6 +10,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './banner.component.css',
 })
 export class BannerComponent {
+  protected companyService = inject(CompanyService);
+  protected readonly isLogoImage = isLogoImage;
   showNotification = false;
 
   scrollToMenu(): void {
@@ -24,4 +28,5 @@ export class BannerComponent {
     }, 4500);
   }
 }
+
 

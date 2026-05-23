@@ -2,15 +2,29 @@
   <div class="header-content">
     <div class="header-top">
       <div class="brand">
-        <span class="logo">🔥</span>
+        @if (isLogoImage(companyService.activeCompany().logo)) {
+          <img
+            class="logo logo-img"
+            [src]="companyService.activeCompany().logo"
+            [alt]="companyService.activeCompany().name"
+          />
+        } @else {
+          <span class="logo">{{ companyService.activeCompany().logo }}</span>
+        }
         <div class="brand-details">
-          <h1>Skinão Grill</h1>
-          <span class="table-badge">Mesa 12</span>
+          <h1>{{ companyService.activeCompany().name }}</h1>
+          <span class="table-badge">Mesa {{ companyService.tableNumber() }}</span>
         </div>
       </div>
 
       <div class="header-actions">
         <span class="status-badge"><span class="pulse-dot"></span> Aberto</span>
+        
+        <!-- Botão Admin Config -->
+        <button class="admin-btn" aria-label="Configurações" (click)="onAdminClick()">
+          <span class="admin-icon">⚙️</span>
+        </button>
+
         <button class="cart-btn" aria-label="Carrinho" (click)="onCartClick()">
           <span class="cart-icon">🛒</span>
           <span class="cart-count" *ngIf="cartService.itemsCount() > 0">{{ cartService.itemsCount() }}</span>
@@ -20,7 +34,7 @@
 
     <div class="search-container">
       <span class="search-icon">🔍</span>
-      <input type="text" placeholder="Buscar no cardápio (ex: Picanha, Cupim)..." (input)="onSearch($event)" />
+      <input type="text" [placeholder]="'Buscar no cardápio de ' + companyService.activeCompany().name + '...'" (input)="onSearch($event)" />
     </div>
   </div>
 </header>

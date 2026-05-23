@@ -1,4 +1,13 @@
-/* Global light theme definitions */
+/* Global CSS variables for dynamic theming */
+:root {
+  --primary-color: #d93829;
+  --primary-color-hover: #b82b1d;
+  --primary-color-rgb: 217, 56, 41;
+  --primary-color-light: rgba(217, 56, 41, 0.12);
+  --primary-color-border: rgba(217, 56, 41, 0.3);
+  --accent-color: #ffcd00;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -7,3 +16,4 @@ body {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
