@@ -6,6 +6,8 @@
   --primary-color-light: rgba(217, 56, 41, 0.12);
   --primary-color-border: rgba(217, 56, 41, 0.3);
   --accent-color: #ffcd00;
+  --app-max-width: 768px;
+  --app-padding-x: 16px;
 }
 
 body {

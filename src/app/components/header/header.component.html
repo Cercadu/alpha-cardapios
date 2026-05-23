@@ -1,40 +1,65 @@
 <header class="header">
   <div class="header-content">
     <div class="header-top">
-      <div class="brand">
-        @if (isLogoImage(companyService.activeCompany().logo)) {
+      @if (companyService.activeCompany().creatorLogo && !companyService.activeCompany().showAlphaArtesFooter) {
+        <a
+          class="creator-brand"
+          [href]="alphaArtesInstagram"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Alpha Artes no Instagram"
+        >
           <img
-            class="logo logo-img"
-            [src]="companyService.activeCompany().logo"
-            [alt]="companyService.activeCompany().name"
+            class="creator-logo"
+            [src]="companyService.activeCompany().creatorLogo"
+            alt="Alpha Artes"
           />
-        } @else {
-          <span class="logo">{{ companyService.activeCompany().logo }}</span>
-        }
-        <div class="brand-details">
-          <h1>{{ companyService.activeCompany().name }}</h1>
-          <span class="table-badge">Mesa {{ companyService.tableNumber() }}</span>
+        </a>
+      }
+
+      <div class="header-right">
+        <div class="brand">
+          @if (isLogoImage(companyService.activeCompany().logo)) {
+            <img
+              class="logo logo-img"
+              [src]="companyService.activeCompany().logo"
+              [alt]="companyService.activeCompany().name"
+            />
+          } @else {
+            <span class="logo">{{ companyService.activeCompany().logo }}</span>
+          }
+          <div class="brand-details">
+            <h1 class="brand-title">{{ companyService.activeCompany().name }}</h1>
+            @if (companyService.activeCompany().features.tableNumber) {
+              <span class="table-badge">Mesa {{ companyService.tableNumber() }}</span>
+            }
+          </div>
         </div>
-      </div>
 
-      <div class="header-actions">
-        <span class="status-badge"><span class="pulse-dot"></span> Aberto</span>
-        
-        <!-- Botão Admin Config -->
-        <button class="admin-btn" aria-label="Configurações" (click)="onAdminClick()">
-          <span class="admin-icon">⚙️</span>
-        </button>
+        <div class="header-actions">
+          @if (companyService.activeCompany().features.openStatus) {
+            <span class="status-badge"><span class="pulse-dot"></span> Aberto</span>
+          }
 
-        <button class="cart-btn" aria-label="Carrinho" (click)="onCartClick()">
-          <span class="cart-icon">🛒</span>
-          <span class="cart-count" *ngIf="cartService.itemsCount() > 0">{{ cartService.itemsCount() }}</span>
-        </button>
+          @if (companyService.activeCompany().features.adminPanel) {
+            <button class="admin-btn" aria-label="Configurações" (click)="onAdminClick()">
+              <span class="admin-icon">⚙️</span>
+            </button>
+          }
+
+          @if (companyService.activeCompany().features.cart) {
+            <button class="cart-btn" aria-label="Carrinho" (click)="onCartClick()">
+              <span class="cart-icon">🛒</span>
+              <span class="cart-count" *ngIf="cartService.itemsCount() > 0">{{ cartService.itemsCount() }}</span>
+            </button>
+          }
+        </div>
       </div>
     </div>
 
     <div class="search-container">
       <span class="search-icon">🔍</span>
-      <input type="text" [placeholder]="'Buscar no cardápio de ' + companyService.activeCompany().name + '...'" (input)="onSearch($event)" />
+      <input type="text" [placeholder]="searchPlaceholder" (input)="onSearch($event)" />
     </div>
   </div>
 </header>

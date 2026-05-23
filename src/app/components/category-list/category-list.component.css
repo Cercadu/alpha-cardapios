@@ -1,7 +1,5 @@
 .categories {
-    padding: 24px 16px;
-    max-width: 768px; /* Mantém alinhado perfeitamente com a lista */
-    margin: 0 auto;
+    padding: 24px var(--app-padding-x) 0;
     box-sizing: border-box;
 }
 

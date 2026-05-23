@@ -7,6 +7,7 @@ import { ProductCardComponent } from '../../components/product-card/product-card
 import { ProductDetailModalComponent } from '../../components/product-detail-modal/product-detail-modal.component';
 import { CartModalComponent } from '../../components/cart-modal/cart-modal.component';
 import { AdminModalComponent } from '../../components/admin-modal/admin-modal.component';
+import { SiteCreditFooterComponent } from '../../components/site-credit-footer/site-credit-footer.component';
 import { Product } from '../../data/menu-data';
 import { CompanyService } from '../../services/company.service';
 
@@ -21,6 +22,7 @@ import { CompanyService } from '../../services/company.service';
     ProductDetailModalComponent,
     CartModalComponent,
     AdminModalComponent,
+    SiteCreditFooterComponent,
   ],
   templateUrl: './cardapio-home.component.html',
   styleUrl: './cardapio-home.component.css',

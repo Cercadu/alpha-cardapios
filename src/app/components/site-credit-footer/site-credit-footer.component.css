@@ -1,0 +1,102 @@
+.site-credit {
+  margin: 20px 0 36px;
+  padding: 20px var(--app-padding-x) 32px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: center;
+}
+
+.credit-layout {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.credit-logo {
+  width: 40%;
+  max-width: 150px;
+  min-width: 110px;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+}
+
+.credit-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+}
+
+.credit-label {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #3d3d3d;
+  line-height: 1.25;
+}
+
+.credit-brand {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #2a2a2a;
+  line-height: 1.2;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #3d3d3d;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  transition: opacity 0.2s ease;
+}
+
+.social-link:hover {
+  opacity: 0.75;
+}
+
+.social-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+@media (max-width: 360px) {
+  .credit-layout {
+    gap: 12px;
+  }
+
+  .credit-logo {
+    min-width: 90px;
+    max-width: 120px;
+  }
+
+  .credit-label {
+    font-size: 0.85rem;
+  }
+
+  .credit-brand {
+    font-size: 1rem;
+  }
+
+  .social-link {
+    font-size: 0.82rem;
+  }
+
+  .social-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
