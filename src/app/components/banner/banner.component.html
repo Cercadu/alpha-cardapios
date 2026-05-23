@@ -1,41 +1,53 @@
-<div class="banner-container">
-  <div class="banner-background" [style.background-image]="'url(' + companyService.activeCompany().bannerBg + ')'"></div>
-  <div class="banner-overlay"></div>
-  
-  <div class="banner-content">
-    <div class="promo-badge">
-      @if (isLogoImage(companyService.activeCompany().logo)) {
-        <img
-          class="badge-icon badge-icon-img"
-          [src]="companyService.activeCompany().logo"
-          [alt]="companyService.activeCompany().name"
-        />
-      } @else {
-        <span class="badge-icon">{{ companyService.activeCompany().logo }}</span>
-      }
-      <span class="badge-text">
-        {{ companyService.activeCompany().id === 'lions' ? 'Evento Beneficente - Apoie esta Causa!' : 'Destaque do Dia: Burger Artesanal com 15% OFF' }}
-      </span>
-    </div>
-    
-    <h1>{{ companyService.activeCompany().bannerTitle }}</h1>
-    
-    <p>{{ companyService.activeCompany().bannerDescription }}</p>
-    
-    <div class="banner-actions">
-      <button class="btn btn-primary" (click)="scrollToMenu()">
-        Ver Cardápio
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor">
-          <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T760-160H240Z"/>
-        </svg>
-      </button>
-      <button class="btn btn-secondary" (click)="callWaiter()" *ngIf="companyService.activeCompany().showCallWaiter">
-        <span class="btn-icon">🔔</span>
-        Chamar Garçom
-      </button>
+<section class="banner-section">
+@if (companyService.activeCompany().bannerImageOnly) {
+  <div class="banner-container banner-image-only">
+    <img
+      class="banner-img"
+      [src]="companyService.activeCompany().bannerBg"
+      [alt]="companyService.activeCompany().name"
+    />
+  </div>
+} @else {
+  <div class="banner-container">
+    <div class="banner-background" [style.background-image]="'url(' + companyService.activeCompany().bannerBg + ')'"></div>
+    <div class="banner-overlay"></div>
+
+    <div class="banner-content">
+      <div class="promo-badge">
+        @if (isLogoImage(companyService.activeCompany().logo)) {
+          <img
+            class="badge-icon badge-icon-img"
+            [src]="companyService.activeCompany().logo"
+            [alt]="companyService.activeCompany().name"
+          />
+        } @else {
+          <span class="badge-icon">{{ companyService.activeCompany().logo }}</span>
+        }
+        <span class="badge-text">
+          {{ companyService.activeCompany().id === 'lions' ? 'Evento Beneficente - Apoie esta Causa!' : 'Destaque do Dia: Burger Artesanal com 15% OFF' }}
+        </span>
+      </div>
+
+      <h1>{{ companyService.activeCompany().bannerTitle }}</h1>
+
+      <p>{{ companyService.activeCompany().bannerDescription }}</p>
+
+      <div class="banner-actions">
+        <button class="btn btn-primary" (click)="scrollToMenu()">
+          Ver Cardápio
+          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor">
+            <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T760-160H240Z"/>
+          </svg>
+        </button>
+        <button class="btn btn-secondary" (click)="callWaiter()" *ngIf="companyService.activeCompany().showCallWaiter">
+          <span class="btn-icon">🔔</span>
+          Chamar Garçom
+        </button>
+      </div>
     </div>
   </div>
-</div>
+}
+</section>
 
 <!-- Custom Premium Toast Notification -->
 <div class="toast-notification" [class.show]="showNotification">
@@ -45,4 +57,3 @@
     <p>Um atendente foi notificado e já está a caminho da sua mesa.</p>
   </div>
 </div>
-

@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { Product } from '../../data/menu-data';
 import { CartService } from '../../services/cart.service';
+import { CompanyService } from '../../services/company.service';
 
 @Component({
   selector: 'app-product-detail-modal',
@@ -14,6 +15,7 @@ export class ProductDetailModalComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
 
   private cartService = inject(CartService);
+  protected companyService = inject(CompanyService);
 
   quantity: number = 1;
   selectedPriceIndex: number = 0;

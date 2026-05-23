@@ -409,3 +409,18 @@ h3 {
         opacity: 1;
     }
 }
+
+.modal-footer-catalog {
+    justify-content: space-between;
+}
+
+.catalog-price {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+.catalog-close-btn {
+    flex: 0 0 auto;
+    min-width: 120px;
+}

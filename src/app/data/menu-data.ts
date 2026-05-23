@@ -10,10 +10,27 @@ export interface Product {
   description?: string;
   price: number;
   prices?: PriceOption[];
+  /** Título da seção de opções no detalhe (ex.: "Escolha o Sabor") */
+  optionsLabel?: string;
   image: string;
   rating?: number;
   reviewsCount?: number;
   inclusions?: string[];
+}
+
+/** Opções com o mesmo preço (sabor, com/sem gás) — detalhe só no modal. */
+export function hasUniformOptionPrices(product: Product): boolean {
+  if (!product.prices?.length) return false;
+  const first = product.prices[0].value;
+  return product.prices.every((option) => option.value === first);
+}
+
+/** Preço exibido no card da lista. */
+export function getCardDisplayPrice(product: Product): number {
+  if (product.prices?.length && hasUniformOptionPrices(product)) {
+    return product.prices[0].value;
+  }
+  return product.price;
 }
 
 export const MENU_CATEGORIES = [

@@ -38,7 +38,7 @@
 
       <!-- Opções de Preço (Se houver múltiplas) -->
       <div class="options-section" *ngIf="product.prices && product.prices.length > 0">
-        <h3>Escolha uma Opção</h3>
+        <h3>{{ product.optionsLabel || 'Escolha uma Opção' }}</h3>
         <div class="options-list">
           <div 
             class="option-item" 
@@ -57,19 +57,25 @@
 
     </div>
 
-    <!-- Rodapé Fixo com Contador e CTA -->
-    <div class="modal-footer">
-      <div class="quantity-selector">
-        <button class="qty-btn" (click)="decrement()" [disabled]="quantity <= 1">−</button>
-        <span class="qty-number">{{ quantity }}</span>
-        <button class="qty-btn" (click)="increment()">+</button>
-      </div>
+    @if (companyService.activeCompany().features.cart) {
+      <div class="modal-footer">
+        <div class="quantity-selector">
+          <button class="qty-btn" (click)="decrement()" [disabled]="quantity <= 1">−</button>
+          <span class="qty-number">{{ quantity }}</span>
+          <button class="qty-btn" (click)="increment()">+</button>
+        </div>
 
-      <button class="add-btn" (click)="addToCart()">
-        <span>Adicionar</span>
-        <span class="total-price">R$ {{ (currentPrice * quantity) | number:'1.2-2' }}</span>
-      </button>
-    </div>
+        <button class="add-btn" (click)="addToCart()">
+          <span>Adicionar</span>
+          <span class="total-price">R$ {{ (currentPrice * quantity) | number:'1.2-2' }}</span>
+        </button>
+      </div>
+    } @else {
+      <div class="modal-footer modal-footer-catalog">
+        <span class="catalog-price">R$ {{ currentPrice | number:'1.2-2' }}</span>
+        <button type="button" class="add-btn catalog-close-btn" (click)="close.emit()">Fechar</button>
+      </div>
+    }
 
   </div>
 

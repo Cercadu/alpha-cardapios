@@ -1,8 +1,15 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+  min-height: 100dvh;
+  box-sizing: border-box;
+}
+
 .products {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 16px;
-  max-width: 768px;
-  margin: 0 auto;
+  padding: 0 var(--app-padding-x) 16px;
 }

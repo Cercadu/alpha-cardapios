@@ -1,0 +1,30 @@
+<footer class="site-credit">
+  <div class="credit-layout">
+    <img class="credit-logo" [src]="credit.logo" [alt]="credit.name" />
+
+    <div class="credit-info">
+      <p class="credit-label">Cardápio criado por</p>
+      <p class="credit-brand">{{ credit.name }}</p>
+
+      <a
+        [href]="credit.instagramUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="social-link"
+      >
+        <img class="social-icon" [src]="credit.instagramIcon" alt="" />
+        <span>{{ credit.instagramHandle }}</span>
+      </a>
+
+      <a
+        [href]="whatsappUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="social-link"
+      >
+        <img class="social-icon" [src]="credit.whatsappIcon" alt="" />
+        <span>{{ credit.whatsappDisplay }}</span>
+      </a>
+    </div>
+  </div>
+</footer>

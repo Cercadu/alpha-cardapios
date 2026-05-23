@@ -1,3 +1,34 @@
+.banner-section {
+    width: 100%;
+    padding: 16px var(--app-padding-x) 8px;
+    box-sizing: border-box;
+}
+
+.banner-container.banner-image-only {
+    min-height: unset;
+    height: auto;
+    max-height: none;
+    padding: 0;
+    display: block;
+    background-color: transparent;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: middle;
+}
+
+.banner-container:not(.banner-image-only) {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
 .banner-container {
     position: relative;
     width: 100%;

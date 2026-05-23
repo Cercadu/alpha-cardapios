@@ -4,17 +4,17 @@
 
         <p *ngIf="product.description">{{ product.description }}</p>
 
-        <!-- Se tiver múltiplos preços (ex: Simples/Completo ou quantidade de Pessoas) -->
-        <div class="price-options" *ngIf="product.prices && product.prices.length > 0">
+        <!-- Vários preços diferentes (ex.: tamanhos do espetão) -->
+        <div class="price-options" *ngIf="product.prices?.length && !hasUniformOptionPrices(product)">
             <div class="price-row" *ngFor="let option of product.prices">
                 <span class="price-label">{{ option.label }}</span>
                 <span class="price-value">R$ {{ option.value | number:'1.2-2' }}</span>
             </div>
         </div>
 
-        <!-- Se tiver preço único -->
-        <div class="single-price" *ngIf="!product.prices || product.prices.length === 0">
-            <span class="price-value">R$ {{ product.price | number:'1.2-2' }}</span>
+        <!-- Preço único ou opções com mesmo valor (sabor, com/sem gás) -->
+        <div class="single-price" *ngIf="!product.prices?.length || hasUniformOptionPrices(product)">
+            <span class="price-value">R$ {{ getCardDisplayPrice(product) | number:'1.2-2' }}</span>
         </div>
     </div>
 

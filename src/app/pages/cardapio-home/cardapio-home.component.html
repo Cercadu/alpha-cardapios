@@ -12,6 +12,10 @@
     ></app-product-card>
 </div>
 
+@if (companyService.activeCompany().showAlphaArtesFooter) {
+  <app-site-credit-footer></app-site-credit-footer>
+}
+
 <!-- Modal Expandido de Detalhes do Produto (iFood Style) -->
 <app-product-detail-modal 
   *ngIf="selectedProduct" 
@@ -19,15 +23,17 @@
   (close)="closeProductDetail()"
 ></app-product-detail-modal>
 
-<!-- Modal/Sidebar do Carrinho com QR Code -->
-<app-cart-modal
-  *ngIf="showCart"
-  (close)="closeCart()"
-></app-cart-modal>
+@if (companyService.activeCompany().features.cart) {
+  <app-cart-modal
+    *ngIf="showCart"
+    (close)="closeCart()"
+  ></app-cart-modal>
+}
 
-<!-- Modal Administrativo de Configurações e Gerador de QR Code -->
-<app-admin-modal
-  *ngIf="showAdmin"
-  (close)="closeAdmin()"
-></app-admin-modal>
-
+@if (companyService.activeCompany().features.adminPanel) {
+  <app-admin-modal
+    *ngIf="showAdmin"
+    (close)="closeAdmin()"
+  ></app-admin-modal>
+}
+

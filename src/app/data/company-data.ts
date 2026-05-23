@@ -1,10 +1,25 @@
 import { Product, MENU_PRODUCTS, MENU_CATEGORIES } from './menu-data';
+import { ALPHA_ARTES } from './alpha-artes';
+
+/** O que cada cliente habilita no cardápio (multi-plataforma). */
+export interface CompanyFeatures {
+  cart: boolean;
+  tableNumber: boolean;
+  openStatus: boolean;
+  adminPanel: boolean;
+}
 
 export interface CompanyConfig {
   id: string;
   name: string;
-  logo: string; // Emoji ou URL da logo
-  bannerBg: string; 
+  logo: string;
+  /** Logo do criador (Alpha Artes), exibida antes da marca do cliente */
+  creatorLogo?: string;
+  /** Texto do campo de busca (evita repetir o nome longo da empresa) */
+  searchPlaceholder?: string;
+  bannerBg: string;
+  /** Exibe só a imagem do banner, sem textos/botões sobrepostos */
+  bannerImageOnly?: boolean;
   bannerTitle: string;
   bannerDescription: string;
   primaryColor: string;
@@ -15,7 +30,24 @@ export interface CompanyConfig {
   categories: string[];
   products: Product[];
   showCallWaiter: boolean;
+  features: CompanyFeatures;
+  /** Rodapé "Criado por Alpha Artes" com redes de contato */
+  showAlphaArtesFooter?: boolean;
 }
+
+const RESTAURANT_FEATURES: CompanyFeatures = {
+  cart: true,
+  tableNumber: true,
+  openStatus: true,
+  adminPanel: true,
+};
+
+const CATALOG_FEATURES: CompanyFeatures = {
+  cart: false,
+  tableNumber: false,
+  openStatus: false,
+  adminPanel: false,
+};
 
 const LIONS_PRODUTOS_IMG = '/empresas/lions/produtos';
 const LIONS_BANNER = '/empresas/lions/banners';
@@ -46,7 +78,7 @@ export const LIONS_PRODUCTS: Product[] = [
     category: 'Bebidas',
     description: 'Lata de Coca-Cola Sabor Original de 350ml gelada. Perfeito para acompanhar.',
     price: 8.00,
-    image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=300&auto=format&fit=crop',
+    image: `${LIONS_PRODUTOS_IMG}/cocaCola.png`,
     rating: 4.8,
     reviewsCount: 31,
     inclusions: ['Coca-Cola Lata 350ml gelada']
@@ -55,12 +87,18 @@ export const LIONS_PRODUCTS: Product[] = [
     id: 'lions-suco',
     name: 'Suco Del Valle 200ml',
     category: 'Bebidas',
-    description: 'Caixinha de Suco Del Valle Uva (200ml) gelada, saboroso e refrescante para a família.',
+    description: 'Caixinha de Suco Del Valle (200ml) gelada. Toque para ver os sabores disponíveis.',
     price: 8.00,
-    image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?q=80&w=300&auto=format&fit=crop',
+    prices: [
+      { label: 'Laranja', value: 8.00 },
+      { label: 'Pêssego', value: 8.00 },
+      { label: 'Uva', value: 8.00 },
+    ],
+    optionsLabel: 'Escolha o Sabor',
+    image: `${LIONS_PRODUTOS_IMG}/suco.png`,
     rating: 4.7,
-    reviewsCount: 15,
-    inclusions: ['Suco Del Valle Uva 200ml']
+    reviewsCount: 37,
+    inclusions: ['Suco Del Valle 200ml — sabores: Laranja, Pêssego ou Uva']
   },
   {
     id: 'lions-agua',
@@ -72,6 +110,7 @@ export const LIONS_PRODUCTS: Product[] = [
       { label: 'Sem Gás', value: 5.00 },
       { label: 'Com Gás', value: 5.00 }
     ],
+    optionsLabel: 'Escolha a Versão',
     image: `${LIONS_PRODUTOS_IMG}/aguaMineralCristal.png`,
     rating: 4.9,
     reviewsCount: 56,
@@ -102,17 +141,20 @@ export const COMPANIES_CONFIG: Record<string, CompanyConfig> = {
     primaryColorHover: '#b82b1d',
     primaryColorRgb: '217, 56, 41',
     accentColor: '#ffcd00',
-    orderPrefix: '5º Pedal Solidário - Lions Clube',
+    orderPrefix: 'SKINÃO GRILL',
     categories: MENU_CATEGORIES,
     products: MENU_PRODUCTS,
-    showCallWaiter: true
+    showCallWaiter: true,
+    features: RESTAURANT_FEATURES,
   },
   lions: {
     id: 'lions',
     name: '5º Pedal Lions Solidário',
     logo: `${LIONS_BANNER}/iconLions.png`,
-    bannerBg: `${LIONS_BANNER}/banner.jpg`, 
-    bannerTitle: 'Tabela de Preços - Bebidas',
+    searchPlaceholder: 'Buscar bebidas...',
+    bannerBg: `${LIONS_BANNER}/banner.jpg`,
+    bannerImageOnly: true,
+    bannerTitle: '',
     bannerDescription: '',
     primaryColor: '#002F6C',
     primaryColorHover: '#001D42',
@@ -121,6 +163,8 @@ export const COMPANIES_CONFIG: Record<string, CompanyConfig> = {
     orderPrefix: 'LIONS SOLIDÁRIO',
     categories: ['Bebidas'],
     products: LIONS_PRODUCTS,
-    showCallWaiter: false
+    showCallWaiter: false,
+    features: CATALOG_FEATURES,
+    showAlphaArtesFooter: true,
   }
 };
