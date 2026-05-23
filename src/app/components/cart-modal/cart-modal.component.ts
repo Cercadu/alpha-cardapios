@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService, CartItem } from '../../services/cart.service';
+import { CompanyService } from '../../services/company.service';
 
 @Component({
   selector: 'app-cart-modal',
@@ -12,6 +13,7 @@ export class CartModalComponent {
   @Output() close = new EventEmitter<void>();
 
   protected cartService = inject(CartService);
+  protected companyService = inject(CompanyService);
 
   showQrCode: boolean = false;
   qrCodeUrl: string = '';
@@ -41,9 +43,12 @@ export class CartModalComponent {
     const items = this.cartService.cartItems();
     if (items.length === 0) return;
 
-    // Gerar um resumo legível e compacto do pedido para o Garçom ler
-    let summary = `=== PEDIDO SKINÃO GRILL ===\n`;
-    summary += `MESA: 12\n`;
+    const company = this.companyService.activeCompany();
+    const table = this.companyService.tableNumber();
+
+    // Gerar um resumo legível e compacto do pedido para o Garçom/Atendente ler
+    let summary = `=== PEDIDO ${company.orderPrefix} ===\n`;
+    summary += `MESA: ${table}\n`;
     summary += `-----------------------\n`;
     
     items.forEach(item => {
@@ -53,21 +58,21 @@ export class CartModalComponent {
 
     summary += `-----------------------\n`;
     summary += `TOTAL: R$ ${this.cartService.totalPrice().toFixed(2).replace('.', ',')}\n`;
-    summary += `Mesa 12 agradece! 🔥`;
+    summary += `Mesa ${table} agradece! 🔥`;
 
     this.orderSummaryText = summary;
 
-    // Usando a API de QR Code para gerar uma imagem offline de 300x300 pixel, colorida no vermelho da marca (217, 56, 41)
-    const colorParam = '217-56-41'; // RGB de #d93829
+    // Gerar imagem do QR Code offline colorida no tom da marca
+    const colorParam = company.primaryColorRgb.replace(/\s+/g, '').replace(/,/g, '-');
     this.qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&color=${colorParam}&data=${encodeURIComponent(summary)}`;
     
     this.showQrCode = true;
   }
 
   finishOrder(): void {
-    // Limpar o carrinho e fechar tudo
     this.cartService.clearCart();
     this.showQrCode = false;
     this.close.emit();
   }
 }
+
